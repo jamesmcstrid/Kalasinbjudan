@@ -1,0 +1,254 @@
+# Kalasinbjudan
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Ladda Tailwind CSS för styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Ladda typsnitt från Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Typsnitt för rubriker -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- NYTT TYPSNITT FÖR HUVUDRUBRIK -->
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+
+    <!-- LÄGG TILL FÖR IKONER (t.ex. kalender, klocka) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Kalasdags!</title>
+    
+    <style>
+        /* Använder Inter-fonten som standard */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Grön gradient-bakgrund för O'Learys-känsla */
+            background-image: radial-gradient(circle, #1e4b3a, #0a2a1a);
+            /* Låser bilden på plats när man skrollar (snygg effekt) */
+            background-attachment: fixed;
+        }
+
+        /* Regel för 'Vilka kommer?' etc. */
+        h2 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase; /* Gör rubriker till versaler för sport-känsla */
+        }
+        
+        /* SPECIFIK REGEL FÖR HUVUDRUBRIKEN */
+        h1.main-title {
+            font-family: 'Alfa Slab One', cursive; /* Nytt O'Learys-typsnitt */
+            color: #1e4b3a; /* Mörkgrön färg */
+            /* Ta bort uppercase, typsnittet är snyggare normalt */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- MINDRE VIT: Bytt från bg-white till bg-stone-100 -->
+    <div class="bg-stone-100 p-8 md:p-10 rounded-2xl shadow-xl max-w-lg w-full">
+        
+        <!-- Huvudrubrik -->
+        <h1 class="main-title text-4xl md:text-5xl font-bold text-center mb-4">
+            Välkommen på Sixten och Hugos 11-årskalas!
+        </h1>
+        <p class="text-center text-gray-600 text-lg mb-6">Du är bjuden på födelsedagskalas!</p>
+        
+        <!-- Info-box -->
+        <div class="mb-6">
+            <div class="bg-blue-100 p-4 rounded-lg space-y-2">
+                <p><strong><i class="fas fa-calendar-alt"></i> När:</strong> Lördag 6:e december</p>
+                <p><strong><i class="fas fa-clock"></i> Tid:</strong> kl. 11:00 - 13:00</p>
+                <p><strong><i class="fas fa-map-marker-alt"></i> Var:</strong> O'Learys Kungälv (Älvebacken 37, Kongahälla)</p>
+                <p class="pt-2 border-t border-blue-200 mt-2">Vi bjuder på bowling och sedan mat (hamburgare)!</p>
+            </div>
+        </div>
+        
+        <!-- Felmeddelande (dolt) -->
+        <div id="errorMessage" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-6" role="alert">
+            <strong class="font-bold">Hoppsan!</strong>
+            <span class="block sm:inline">Kunde inte anmäla. Försök igen.</span>
+        </div>
+
+        <!-- Anmälningsformulär -->
+        <form id="rsvpForm" class="space-y-4 mb-8">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Skriv ditt namn här...</label>
+                <input type="text" id="name" name="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+            </div>
+            <div>
+                <label for="allergies" class="block text-sm font-medium text-gray-700">Allergier? (lämna tom om inga)</label>
+                <input type="text" id="allergies" name="allergies" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <button type="submit" id="submitButton" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                Jag kommer!
+            </button>
+        </form>
+
+        <!-- Lista på de som kommer -->
+        <div>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Vilka kommer?</h2>
+            <ul id="guestList" class="space-y-2">
+                <li id="loadingMessage" class="text-gray-500 italic">Laddar gäster...</li>
+                <!-- Gäster läggs till här av JavaScript -->
+            </ul>
+        </div>
+        
+        <!-- *** GEMINI-FUNKTION BORTTAGEN *** -->
+
+    </div>
+
+    <!-- Firebase App Logic -->
+    <script type="module">
+        // Import necessary Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, setDoc, getDoc, query, where, getDocs, updateDoc, deleteDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // *** KODEN ÄR NU INLINDAD I EN main()-FUNKTION FÖR ATT LÖSA 'Illegal return' FELET ***
+        async function main() {
+            // Firebase-konfiguration (tas från den globala variabeln)
+            const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+            // Hämta referens till felmeddelande-rutan tidigt
+            const globalErrorMessage = document.getElementById("errorMessage");
+
+            // Initiera Firebase
+            let app, db, auth;
+            try {
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                // setLogLevel('Debug'); // Ta bort kommentar för felsökningsloggar
+            } catch (e) {
+                console.error("Firebase initialization error:", e);
+                globalErrorMessage.innerText = "Kunde inte ladda databasen. Ladda om sidan.";
+                globalErrorMessage.classList.remove("hidden");
+                return; // Detta 'return' är nu OK, det är inuti main()
+            }
+
+            // Logga in användaren (anonymt eller med token)
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Authentication error:", error);
+                globalErrorMessage.innerText = "Kunde inte autentisera. Ladda om sidan.";
+                globalErrorMessage.classList.remove("hidden");
+                return; // Detta 'return' är nu OK
+            }
+
+            const userId = auth.currentUser ? auth.currentUser.uid : crypto.randomUUID();
+            
+            // Sökväg till datan i Firestore (delad offentlig data)
+            const rsvpCollectionPath = `artifacts/${appId}/public/data/rsvps`;
+
+            // Hämta referenser till HTML-element
+            const rsvpForm = document.getElementById("rsvpForm");
+            const nameInput = document.getElementById("name");
+            const allergiesInput = document.getElementById("allergies");
+            const guestList = document.getElementById("guestList");
+            const loadingMessage = document.getElementById("loadingMessage");
+            const errorMessage = document.getElementById("errorMessage"); // Redan hämtad, men ok
+            const submitButton = document.getElementById("submitButton");
+
+            // --- Logik för att spara anmälan ---
+            rsvpForm.addEventListener("submit", async (e) => {
+                e.preventDefault(); // Förhindra att sidan laddas om
+                
+                const name = nameInput.value.trim();
+                const allergies = allergiesInput.value.trim(); // Kan vara tom
+
+                // Validera att namn är ifyllt
+                if (!name) {
+                    errorMessage.innerText = "Du måste fylla i ditt namn.";
+                    errorMessage.classList.remove("hidden");
+                    return; // OK, är inuti en event listener
+                }
+
+                // Inaktivera knapp under sändning
+                submitButton.disabled = true;
+                submitButton.innerText = "Sparar...";
+                errorMessage.classList.add("hidden");
+
+                try {
+                    // Lägg till dokumentet i Firestore
+                    await addDoc(collection(db, rsvpCollectionPath), {
+                        name: name,
+                        allergies: allergies || "Inga", // Spara "Inga" om fältet är tomt
+                        timestamp: new Date()
+                    });
+
+                    // Återställ formuläret
+                    rsvpForm.reset();
+                    
+                } catch (error) {
+                    console.error("Error adding document: ", error);
+                    errorMessage.innerText = "Kunde inte spara anmälan. Försök igen.";
+                    errorMessage.classList.remove("hidden");
+                } finally {
+                    // Återaktivera knappen
+                    submitButton.disabled = false;
+                    submitButton.innerText = "Jag kommer!";
+                }
+            });
+
+            // --- Logik för att visa gästlistan (realtid) ---
+            try {
+                const q = query(collection(db, rsvpCollectionPath));
+                
+                onSnapshot(q, (snapshot) => {
+                    // Rensa listan och ta bort laddningsmeddelandet
+                    guestList.innerHTML = "";
+                    
+                    if (snapshot.empty) {
+                        guestList.innerHTML = '<li class="text-gray-500 italic">Ingen har anmält sig än...</li>';
+                    } else {
+                        snapshot.docs.forEach((doc) => {
+                            const guest = doc.data();
+                            const li = document.createElement("li");
+                            li.className = "flex justify-between items-center bg-gray-50 p-2 rounded";
+                            
+                            let allergyText = "";
+                            // Visa bara allergi-info om det finns någon
+                            if (guest.allergies && guest.allergies.toLowerCase() !== "inga" && guest.allergies.toLowerCase() !== "nej") {
+                                allergyText = `<span class="text-sm text-red-600 font-semibold ml-2">(<i class="fas fa-exclamation-triangle"></i> ${guest.allergies})</span>`;
+                            }
+                            
+                            li.innerHTML = `
+                                <span>${guest.name}</span>
+                                ${allergyText}
+                            `;
+                            guestList.appendChild(li);
+                        });
+                    }
+                }, (error) => {
+                    console.error("Error listening to snapshot: ", error);
+                    guestList.innerHTML = '<li class="text-red-500">Kunde inte ladda gästlistan.</li>';
+                });
+                
+            } catch (error) {
+                console.error("Error setting up snapshot listener: ", error);
+                guestList.innerHTML = '<li class="text-red-500">Kunde inte ladda gästlistan.</li>';
+            }
+
+            // --- Logik för Gemini API BORTTAGEN ---
+        
+        } // Slut på main()-funktionen
+
+        // Kör hela skriptet
+        main();
+
+    </script>
+</body>
+</html>

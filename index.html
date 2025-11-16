@@ -111,8 +111,16 @@
         // *** KODEN ÄR NU INLINDAD I EN main()-FUNKTION FÖR ATT LÖSA 'Illegal return' FELET ***
         async function main() {
             // Firebase-konfiguration (tas från den globala variabeln)
-            const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const firebaseConfig = {
+                                        apiKey: "AIzaSyCIOzOVDyt5iS8R3tHpPmVEDAKxTmdlGOo",
+                                        authDomain: "sixtenskalas.firebaseapp.com",
+                                        projectId: "sixtenskalas",
+                                        storageBucket: "sixtenskalas.firebasestorage.app",
+                                        messagingSenderId: "491873655962",
+                                        appId: "1:491873655962:web:e8ebabf41afbb5b3a99323",
+                                        measurementId: "G-CH6GPG4R32"
+                                    };
+            const appId = firebaseConfig.projectId;
             const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
             // Hämta referens till felmeddelande-rutan tidigt

@@ -130,9 +130,9 @@
                 <p class="pt-2 border-t border-purple-200 mt-2">
                     <i class="fas fa-phone"></i> <strong>Frågor?</strong> Kontakta Linnéa (Cleos mamma) på <a href="tel:0737087225" class="text-purple-600 hover:underline">0737-087225</a>
                 </p>
-            </div>
+                </div>
         </div>
-        
+
         <!-- Felmeddelande (dolt) -->
         <div id="errorMessage" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-6" role="alert">
             <strong class="font-bold">Hoppsan!</strong>
@@ -154,6 +154,21 @@
             </button>
         </form>
 
+        <!-- Lägg till i kalender -->
+        <div class="mb-8 text-center">
+            <p class="text-sm text-gray-600 mb-2">
+                <i class="fas fa-calendar-check"></i> Vill du lägga till kalaset i din kalender? Klicka på en av knapparna nedan:
+            </p>
+            <div class="flex flex-wrap justify-center gap-2">
+                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Cleos%208-%C3%A5rskalas&dates=20260131T153000Z/20260131T173000Z&details=Gymnastikkalas!%20Ta%20med%20r%C3%B6rliga%20kl%C3%A4der%20(gympakl%C3%A4der%20eller%20mjukiskl%C3%A4der).%20Kom%20barfota%20eller%20ha%20gympaskor.&location=Stora%20hallen%2C%20%C3%84lv%C3%A4ngenhallen" target="_blank" class="inline-flex items-center px-3 py-2 bg-white border border-purple-300 rounded-md text-sm text-purple-700 hover:bg-purple-50 transition-colors">
+                    <i class="fab fa-google mr-2"></i> Google
+                </a>
+                <button onclick="downloadICS()" class="inline-flex items-center px-3 py-2 bg-white border border-purple-300 rounded-md text-sm text-purple-700 hover:bg-purple-50 transition-colors">
+                    <i class="fas fa-calendar-plus mr-2"></i> Apple/Outlook
+                </button>
+            </div>
+        </div>
+
         <!-- Lista på de som kommer -->
         <div>
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Vilka kommer?</h2>
@@ -166,6 +181,29 @@
         <!-- *** GEMINI-FUNKTION BORTTAGEN *** -->
 
     </div>
+
+    <!-- Kalender-funktion -->
+    <script>
+        function downloadICS() {
+            const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Cleos Kalas//SE
+BEGIN:VEVENT
+DTSTART:20260131T163000
+DTEND:20260131T183000
+SUMMARY:Cleos 8-årskalas
+DESCRIPTION:Gymnastikkalas! Ta med rörliga kläder (gympakläder eller mjukiskläder). Kom barfota eller ha gympaskor.
+LOCATION:Stora hallen, Älvängenhallen
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'cleos-kalas.ics';
+            link.click();
+        }
+    </script>
 
     <!-- Firebase App Logic -->
     <script type="module">

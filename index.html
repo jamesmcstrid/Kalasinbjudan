@@ -20,14 +20,14 @@
     <!-- LÄGG TILL FÖR IKONER (t.ex. kalender, klocka) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title>Kalasdags!</title>
-    
+    <title>Gymnastikkalas!</title>
+
     <style>
         /* Använder Inter-fonten som standard */
         body {
             font-family: 'Inter', sans-serif;
-            /* Grön gradient-bakgrund för O'Learys-känsla */
-            background-image: radial-gradient(circle, #1e4b3a, #0a2a1a);
+            /* Rosa/lila gradient-bakgrund för gymnastik-känsla */
+            background-image: radial-gradient(circle, #e879f9, #a855f7);
             /* Låser bilden på plats när man skrollar (snygg effekt) */
             background-attachment: fixed;
         }
@@ -35,35 +35,101 @@
         /* Regel för 'Vilka kommer?' etc. */
         h2 {
             font-family: 'Oswald', sans-serif;
-            text-transform: uppercase; /* Gör rubriker till versaler för sport-känsla */
+            text-transform: uppercase;
         }
-        
+
         /* SPECIFIK REGEL FÖR HUVUDRUBRIKEN */
         h1.main-title {
-            font-family: 'Alfa Slab One', cursive; /* Nytt O'Learys-typsnitt */
-            color: #1e4b3a; /* Mörkgrön färg */
-            /* Ta bort uppercase, typsnittet är snyggare normalt */
+            font-family: 'Alfa Slab One', cursive;
+            color: #a855f7; /* Lila färg */
+        }
+
+        /* Ballonger som flyger */
+        .balloon {
+            position: fixed;
+            bottom: -150px;
+            font-size: 3rem;
+            animation: float-up linear infinite;
+            z-index: 0;
+            opacity: 0.9;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.9;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh) rotate(20deg);
+                opacity: 0;
+            }
+        }
+
+        .balloon:nth-child(1) { left: 5%; animation-duration: 8s; animation-delay: 0s; }
+        .balloon:nth-child(2) { left: 15%; animation-duration: 10s; animation-delay: 2s; }
+        .balloon:nth-child(3) { left: 25%; animation-duration: 9s; animation-delay: 4s; }
+        .balloon:nth-child(4) { left: 75%; animation-duration: 11s; animation-delay: 1s; }
+        .balloon:nth-child(5) { left: 85%; animation-duration: 8s; animation-delay: 3s; }
+        .balloon:nth-child(6) { left: 95%; animation-duration: 10s; animation-delay: 5s; }
+
+        /* Bildplatshållare */
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #a855f7;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
         }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
 
+    <!-- Flygande ballonger -->
+    <div class="balloon">🎈</div>
+    <div class="balloon">🎈</div>
+    <div class="balloon">🎈</div>
+    <div class="balloon">🎈</div>
+    <div class="balloon">🎈</div>
+    <div class="balloon">🎈</div>
+
     <!-- MINDRE VIT: Bytt från bg-white till bg-stone-100 -->
-    <div class="bg-stone-100 p-8 md:p-10 rounded-2xl shadow-xl max-w-lg w-full">
+    <div class="bg-stone-100 p-8 md:p-10 rounded-2xl shadow-xl max-w-lg w-full relative z-10">
         
         <!-- Huvudrubrik -->
         <h1 class="main-title text-4xl md:text-5xl font-bold text-center mb-4">
-            Välkommen på Sixten och Hugos 11-årskalas!
+            Hoppa, hjula & fira med Cleo!
         </h1>
-        <p class="text-center text-gray-600 text-lg mb-6">Du är bjuden på födelsedagskalas!</p>
-        
+
+        <!-- Bild på Cleo -->
+        <div class="flex justify-center mb-4">
+            <!-- BYT UT src="BILD_PA_CLEO.jpg" MOT DIN BILD -->
+            <img src="ED7FDD6D-8D16-4D4A-994B-C1AF180659F0.JPG" alt="Cleo" class="profile-image">
+        </div>
+
+        <p class="text-center text-gray-600 text-lg mb-6">Du är bjuden på gymnastikkalas - Cleo fyller 8 år!</p>
+
         <!-- Info-box -->
         <div class="mb-6">
-            <div class="bg-blue-100 p-4 rounded-lg space-y-2">
-                <p><strong><i class="fas fa-calendar-alt"></i> När:</strong> Lördag 6:e december</p>
-                <p><strong><i class="fas fa-clock"></i> Tid:</strong> kl. 11:00 - 13:00</p>
-                <p><strong><i class="fas fa-map-marker-alt"></i> Var:</strong> O'Learys Kungälv (Älvebacken 37, Kongahälla)</p>
-                <p class="pt-2 border-t border-blue-200 mt-2">Vi bjuder på bowling och sedan mat (hamburgare)! Samling Kl: 10:45 för utprovning skor och uppladdning inför spelet. </p>
+            <div class="bg-purple-100 p-4 rounded-lg space-y-2">
+                <p><strong><i class="fas fa-calendar-alt"></i> När:</strong> Fredag 31 januari 2026</p>
+                <p><strong><i class="fas fa-clock"></i> Tid:</strong> kl 16:30 - 18:30</p>
+                <p><strong><i class="fas fa-map-marker-alt"></i> Var:</strong> Stora hallen, Älvängenhallen</p>
+                <p class="pt-2 border-t border-purple-200 mt-2">
+                    <i class="fas fa-birthday-cake"></i> Vi bjuder på fika och ska leka massor av roliga lekar med full energi!
+                </p>
+                <p class="pt-2 border-t border-purple-200 mt-2">
+                    <i class="fas fa-tshirt"></i> <strong>Ta med:</strong> Rörliga kläder (gympakläder eller mjukiskläder). Kom barfota eller ha gympaskor - vi ska balansera, hoppa och ha kul!
+                </p>
+                <p class="pt-2 border-t border-purple-200 mt-2 font-semibold">
+                    <i class="fas fa-envelope"></i> OSA senast: 30 januari
+                </p>
+                <p class="pt-2 border-t border-purple-200 mt-2">
+                    <i class="fas fa-phone"></i> <strong>Frågor?</strong> Kontakta Linnéa (Cleos mamma) på <a href="tel:0737087225" class="text-purple-600 hover:underline">0737-087225</a>
+                </p>
             </div>
         </div>
         
@@ -77,14 +143,14 @@
         <form id="rsvpForm" class="space-y-4 mb-8">
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Skriv ditt namn här...</label>
-                <input type="text" id="name" name="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                <input type="text" id="name" name="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500" required>
             </div>
             <div>
                 <label for="allergies" class="block text-sm font-medium text-gray-700">Allergier? (lämna tom om inga)</label>
-                <input type="text" id="allergies" name="allergies" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <input type="text" id="allergies" name="allergies" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500">
             </div>
-            <button type="submit" id="submitButton" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
-                Jag kommer!
+            <button type="submit" id="submitButton" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors">
+                Jag kommer gärna på kalas!
             </button>
         </form>
 

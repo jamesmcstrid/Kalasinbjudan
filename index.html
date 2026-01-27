@@ -20,7 +20,7 @@
     <!-- LÄGG TILL FÖR IKONER (t.ex. kalender, klocka) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title>Gymnastikkalas!</title>
+    <title>Cleos kalas - Inställt</title>
 
     <style>
         /* Använder Inter-fonten som standard */
@@ -88,48 +88,44 @@
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
 
-    <!-- Flygande ballonger -->
+    <!-- Flygande ballonger - DOLDA (kalaset inställt) -->
+    <!--
     <div class="balloon">🎈</div>
     <div class="balloon">🎈</div>
     <div class="balloon">🎈</div>
     <div class="balloon">🎈</div>
     <div class="balloon">🎈</div>
     <div class="balloon">🎈</div>
+    -->
 
     <!-- MINDRE VIT: Bytt från bg-white till bg-stone-100 -->
     <div class="bg-stone-100 p-8 md:p-10 rounded-2xl shadow-xl max-w-lg w-full relative z-10">
         
+        <!-- Meddelande om inställt kalas -->
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 mb-6 rounded-lg">
+            <p class="font-bold text-lg"><i class="fas fa-exclamation-circle"></i> Kalaset är tyvärr inställt</p>
+            <p class="mt-2">Cleo har brutit armen och behöver tid att läka.</p>
+            <p class="mt-2">Vi återkommer med nytt datum så snart hon mår bättre!</p>
+        </div>
+
         <!-- Huvudrubrik -->
-        <h1 class="main-title text-4xl md:text-5xl font-bold text-center mb-4">
+        <h1 class="main-title text-4xl md:text-5xl font-bold text-center mb-4 opacity-50">
             Hoppa, hjula & fira med Cleo!
         </h1>
 
         <!-- Bild på Cleo -->
         <div class="flex justify-center mb-4">
-            <!-- BYT UT src="BILD_PA_CLEO.jpg" MOT DIN BILD -->
-            <img src="ED7FDD6D-8D16-4D4A-994B-C1AF180659F0.JPG" alt="Cleo" class="profile-image">
+            <img src="ED7FDD6D-8D16-4D4A-994B-C1AF180659F0.JPG" alt="Cleo" class="profile-image opacity-50">
         </div>
 
-        <p class="text-center text-gray-600 text-lg mb-6">Du är bjuden på gymnastikkalas - Cleo fyller 8 år!</p>
+        <p class="text-center text-gray-500 text-lg mb-6 line-through">Du är bjuden på gymnastikkalas - Cleo fyller 8 år!</p>
 
-        <!-- Info-box -->
-        <div class="mb-6">
-            <div class="bg-purple-100 p-4 rounded-lg space-y-2">
-                <p><strong><i class="fas fa-calendar-alt"></i> När:</strong> Lördag 31 januari 2026</p>
-                <p><strong><i class="fas fa-clock"></i> Tid:</strong> kl 16:30 - 18:30</p>
-                <p><strong><i class="fas fa-map-marker-alt"></i> Var:</strong> Stora hallen, Älvängenhallen</p>
-                <p class="pt-2 border-t border-purple-200 mt-2">
-                    <i class="fas fa-birthday-cake"></i> Vi bjuder på fika och ska leka massor av roliga lekar med full energi!
-                </p>
-                <p class="pt-2 border-t border-purple-200 mt-2">
-                    <i class="fas fa-tshirt"></i> <strong>Ta med:</strong> Rörliga kläder (gympakläder eller mjukiskläder). Kom barfota eller ha gympaskor - vi ska balansera, hoppa och ha kul!
-                </p>
-                <p class="pt-2 border-t border-purple-200 mt-2 font-semibold">
-                    <i class="fas fa-envelope"></i> OSA senast: 30 januari
-                </p>
-                <p class="pt-2 border-t border-purple-200 mt-2">
-                    <i class="fas fa-phone"></i> <strong>Frågor?</strong> Kontakta Linnéa (Cleos mamma) på <a href="tel:0737087225" class="text-purple-600 hover:underline">0737-087225</a>
-                </p>
+        <!-- Info-box - Överstruken (kalaset inställt) -->
+        <div class="mb-6 opacity-50">
+            <div class="bg-gray-100 p-4 rounded-lg space-y-2">
+                <p class="line-through"><strong><i class="fas fa-calendar-alt"></i> När:</strong> Lördag 31 januari 2026</p>
+                <p class="line-through"><strong><i class="fas fa-clock"></i> Tid:</strong> kl 16:30 - 18:30</p>
+                <p class="line-through"><strong><i class="fas fa-map-marker-alt"></i> Var:</strong> Stora hallen, Älvängenhallen</p>
                 </div>
         </div>
 
@@ -139,8 +135,8 @@
             <span class="block sm:inline">Kunde inte anmäla. Försök igen.</span>
         </div>
 
-        <!-- Anmälningsformulär -->
-        <form id="rsvpForm" class="space-y-4 mb-8">
+        <!-- Anmälningsformulär - DOLT (kalaset inställt) -->
+        <form id="rsvpForm" class="space-y-4 mb-8 hidden">
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Skriv ditt namn här...</label>
                 <input type="text" id="name" name="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500" required>
@@ -154,28 +150,19 @@
             </button>
         </form>
 
-        <!-- Lägg till i kalender -->
-        <div class="mb-8 text-center">
-            <p class="text-sm text-gray-600 mb-2">
-                <i class="fas fa-calendar-check"></i> Vill du lägga till kalaset i din kalender? Klicka på en av knapparna nedan:
-            </p>
-            <div class="flex flex-wrap justify-center gap-2">
-                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Cleos%208-%C3%A5rskalas&dates=20260131T153000Z/20260131T173000Z&details=Gymnastikkalas!%20Ta%20med%20r%C3%B6rliga%20kl%C3%A4der%20(gympakl%C3%A4der%20eller%20mjukiskl%C3%A4der).%20Kom%20barfota%20eller%20ha%20gympaskor.&location=Stora%20hallen%2C%20%C3%84lv%C3%A4ngenhallen" target="_blank" class="inline-flex items-center px-3 py-2 bg-white border border-purple-300 rounded-md text-sm text-purple-700 hover:bg-purple-50 transition-colors">
-                    <i class="fab fa-google mr-2"></i> Google
-                </a>
-                <button onclick="downloadICS()" class="inline-flex items-center px-3 py-2 bg-white border border-purple-300 rounded-md text-sm text-purple-700 hover:bg-purple-50 transition-colors">
-                    <i class="fas fa-calendar-plus mr-2"></i> Apple/Outlook
-                </button>
-            </div>
-        </div>
+        <!-- Kalender-knappar - DOLDA (kalaset inställt) -->
 
-        <!-- Lista på de som kommer -->
-        <div>
+        <!-- Lista på de som kommer - DOLD (kalaset inställt) -->
+        <div class="hidden">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Vilka kommer?</h2>
             <ul id="guestList" class="space-y-2">
                 <li id="loadingMessage" class="text-gray-500 italic">Laddar gäster...</li>
-                <!-- Gäster läggs till här av JavaScript -->
             </ul>
+        </div>
+
+        <!-- Kontaktinfo -->
+        <div class="text-center text-gray-600">
+            <p><i class="fas fa-phone"></i> Frågor? Kontakta Linnéa på <a href="tel:0737087225" class="text-purple-600 hover:underline">0737-087225</a></p>
         </div>
         
         <!-- *** GEMINI-FUNKTION BORTTAGEN *** -->
